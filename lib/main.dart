@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_library/core/navigator/navigator.dart';
 import 'package:flutter_library/core/scroll/custom_scroll_behavior.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
