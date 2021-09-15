@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 15),
                 TextFormField(
                   decoration: const InputDecoration(
                     label: Text('Search...'),
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           TextButton(
             onPressed: () {},
             child: Row(
@@ -61,31 +61,56 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           SizedBox(
-            height: 300,
+            height: 360,
             width: double.infinity,
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: (context, _) => const SizedBox(width: 8),
+              itemCount: 10,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Container(
-                margin: const EdgeInsets.only(left: 16),
-                color: Colors.red,
-                height: 250,
-                width: 250,
-              ),
+              itemBuilder: (context, i) {
+                if (i == 0) {
+                  return const SizedBox(width: 8);
+                }
+                return InkWell(
+                  onTap: () {},
+                  child: Ink(
+                    width: 190,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(8),
+                        bottomRight: Radius.circular(8),
+                      ),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 0.5)
+                      ],
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Image.asset(
+                            'assets/images/book_cover.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const Text(
+                          'Title',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const SizedBox(),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
-          const Spacer(),
-          Text(
-            'By Sebastián Garzón',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontSize: 14,
-              fontStyle: FontStyle.italic,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 10),
         ],
       ),
     );

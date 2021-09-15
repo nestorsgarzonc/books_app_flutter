@@ -15,7 +15,6 @@ class CustomScrollBehavior extends MaterialScrollBehavior {
           case TargetPlatform.windows:
             return Scrollbar(
               controller: details.controller,
-              isAlwaysShown: true,
               child: Padding(padding: const EdgeInsets.only(bottom: 5), child: child),
             );
           case TargetPlatform.android:
