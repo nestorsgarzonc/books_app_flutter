@@ -8,12 +8,14 @@ class BookCard extends StatelessWidget {
     required this.id,
     this.imgUrl,
     Key? key,
+    this.axis = Axis.vertical,
   }) : super(key: key);
 
   final String title;
   final String? imgUrl;
   final VoidCallback onTap;
   final String id;
+  final Axis axis;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +31,16 @@ class BookCard extends StatelessWidget {
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 0.5)],
           color: Colors.white,
         ),
-        child: Column(
+        child: Flex(
+          direction: axis,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Hero(
-              child: CustomNewtorkImage(imgUrl: imgUrl),
-              tag: id,
+            SizedBox(
+              width: axis == Axis.horizontal ? 150 : null,
+              child: Hero(
+                child: CustomNewtorkImage(imgUrl: imgUrl),
+                tag: id,
+              ),
             ),
             Text(
               title,
