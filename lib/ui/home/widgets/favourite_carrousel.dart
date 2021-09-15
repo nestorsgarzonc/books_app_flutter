@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/ui/book/screen/book_details.dart';
+import 'package:flutter_library/ui/favourites/screens/book_details.dart';
+import 'package:flutter_library/ui/favourites/screens/list_favourites_books.dart';
 import 'package:flutter_library/ui/widgets/cards/book_card.dart';
 
 class FavouritesCarrousel extends StatelessWidget {
@@ -12,7 +13,7 @@ class FavouritesCarrousel extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: TextButton(
-            onPressed: handleOnTapMyFav,
+            onPressed: () => handleOnTapMyFav(context),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -21,7 +22,7 @@ class FavouritesCarrousel extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18, color: Colors.black),
                 ),
                 IconButton(
-                  onPressed: handleOnTapMyFav,
+                  onPressed: () => handleOnTapMyFav(context),
                   icon: const Icon(Icons.arrow_forward_ios),
                 ),
               ],
@@ -52,7 +53,9 @@ class FavouritesCarrousel extends StatelessWidget {
     );
   }
 
-  void handleOnTapMyFav() {}
+  void handleOnTapMyFav(BuildContext context) {
+    Navigator.of(context).pushNamed(ListFavouritesBooks.route);
+  }
 
   void handleOnTapBook(BuildContext context, String id) {
     Navigator.of(context).pushNamed(BookDetails.route, arguments: BookDetailsArgs(bookId: id));
