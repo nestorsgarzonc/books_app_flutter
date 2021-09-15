@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_library/ui/widgets/image/custom_network_image.dart';
 
 class BookCard extends StatelessWidget {
   const BookCard({
     required this.title,
     required this.onTap,
+    required this.id,
     this.imgUrl,
     Key? key,
   }) : super(key: key);
@@ -11,6 +13,7 @@ class BookCard extends StatelessWidget {
   final String title;
   final String? imgUrl;
   final VoidCallback onTap;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +32,9 @@ class BookCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
-              child: imgUrl != null
-                  ? Image.network(imgUrl!, fit: BoxFit.cover)
-                  : Image.asset(
-                      'assets/images/book_cover.png',
-                      fit: BoxFit.cover,
-                    ),
+            Hero(
+              child: CustomNewtorkImage(imgUrl: imgUrl),
+              tag: id,
             ),
             Text(
               title,
