@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/main.dart';
+import 'package:flutter_library/ui/home/screens/home_screen.dart';
 
 class CustomNavigator {
   static Route onGenerateRoute(RouteSettings routeSettings) {
