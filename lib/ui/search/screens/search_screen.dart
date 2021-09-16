@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/ui/favourites/screens/book_details.dart';
+import 'package:flutter_library/ui/favorites/screens/book_details.dart';
 import 'package:flutter_library/ui/widgets/cards/book_card.dart';
 
 class SearchScreen extends StatefulWidget {

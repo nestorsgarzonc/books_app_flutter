@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/ui/favourites/screens/book_details.dart';
-import 'package:flutter_library/ui/favourites/screens/list_favourites_books.dart';
+import 'package:flutter_library/ui/favorites/screens/book_details.dart';
+import 'package:flutter_library/ui/favorites/screens/list_favourites_books.dart';
 import 'package:flutter_library/ui/widgets/cards/book_card.dart';
 
-class FavouritesCarrousel extends StatelessWidget {
-  const FavouritesCarrousel({Key? key}) : super(key: key);
+class FavoritesCarrousel extends StatelessWidget {
+  const FavoritesCarrousel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class FavouritesCarrousel extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'My favourites',
+                  'My favorites',
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18, color: Colors.black),
                 ),
                 IconButton(
@@ -54,7 +54,7 @@ class FavouritesCarrousel extends StatelessWidget {
   }
 
   void handleOnTapMyFav(BuildContext context) {
-    Navigator.of(context).pushNamed(ListFavouritesBooks.route);
+    Navigator.of(context).pushNamed(ListFavoritesBooks.route);
   }
 
   void handleOnTapBook(BuildContext context, String id) {

@@ -67,7 +67,7 @@ class BookDetails extends StatelessWidget {
                                 children: const [
                                   Icon(Icons.favorite),
                                   SizedBox(width: 5),
-                                  Flexible(child: Text('Add to favourites')),
+                                  Flexible(child: Text('Add to favorites')),
                                 ],
                               ),
                             ),

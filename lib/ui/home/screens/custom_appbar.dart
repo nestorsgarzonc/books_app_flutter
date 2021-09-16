@@ -9,7 +9,7 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 150,
+      height: 170,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
@@ -19,29 +19,31 @@ class CustomAppBar extends StatelessWidget {
           bottomRight: Radius.circular(8),
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            CustomDateUtils.getGreeting(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              CustomDateUtils.getGreeting(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          const SizedBox(height: 15),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(SearchScreen.route);
-            },
-            child: TextFormField(
-              decoration: const InputDecoration(label: Text('Search...')),
-              enabled: false,
+            const SizedBox(height: 15),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(SearchScreen.route);
+              },
+              child: TextFormField(
+                decoration: const InputDecoration(label: Text('Search...')),
+                enabled: false,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
