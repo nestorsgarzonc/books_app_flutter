@@ -102,11 +102,11 @@ class _BookDetailBody extends StatelessWidget {
                             ),
                             Text(
                               book?.authorName?.first ?? '',
-                              style: const TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 18),
                             ),
                             Text(
                               '${book?.publishYear?.first ?? ''}',
-                              style: const TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 18),
                             ),
                             Row(
                               children: [
@@ -118,12 +118,13 @@ class _BookDetailBody extends StatelessWidget {
                                 const Text('5/5'),
                               ],
                             ),
-                            const SizedBox(height: 10),
+                            const Spacer(),
                             SizedBox(
                               width: constraints.maxWidth * 0.4,
                               height: 40,
                               child: FavouriteButton(id: _id),
                             ),
+                            const Spacer(),
                           ],
                         ),
                       )
