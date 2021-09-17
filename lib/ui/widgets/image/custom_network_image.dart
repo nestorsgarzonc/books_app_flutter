@@ -11,11 +11,10 @@ class CustomNewtorkImage extends StatelessWidget {
     return imgUrl != null
         ? Image.network(
             imgUrl!,
-            fit: BoxFit.cover,
             errorBuilder: (_, __, ___) {
-              return Image.asset(_placeholder, fit: BoxFit.cover);
+              return Image.asset(_placeholder);
             },
           )
-        : Image.asset('assets/images/book_cover.png', fit: BoxFit.cover);
+        : Image.asset('assets/images/book_cover.png');
   }
 }

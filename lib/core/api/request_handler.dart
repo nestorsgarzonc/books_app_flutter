@@ -29,9 +29,9 @@ class RequestHandler implements IRequestHandler {
     return uri;
   }
 
-  String encodeBody(Map<String, dynamic>? body) {
+  List<int> encodeBody(Map<String, dynamic>? body) {
     log('BODY: $body');
-    return json.encode(body);
+    return utf8.encode(json.encode(body));
   }
 
   void printLogs(http.Response response) {

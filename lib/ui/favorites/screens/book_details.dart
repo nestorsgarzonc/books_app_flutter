@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_library/features/favorites/bloc/favorites_bloc.dart';
 import 'package:flutter_library/features/search/bloc/search_bloc.dart';
 import 'package:flutter_library/features/search/models/book_model.dart';
 import 'package:flutter_library/ui/widgets/image/custom_network_image.dart';
@@ -91,7 +92,7 @@ class _BookDetailBody extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       SizedBox(
-                        width: constraints.maxWidth * 0.56,
+                        width: constraints.maxWidth * 0.55,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -153,15 +154,40 @@ class FavouriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Row(
-        children: const [
-          Icon(Icons.favorite),
-          SizedBox(width: 5),
-          Flexible(child: Text('Add to favorites')),
-        ],
-      ),
+    return BlocBuilder<FavoritesBloc, FavoritesState>(
+      builder: (context, state) {
+        if (state is FavoritesInitial) {
+          BlocProvider.of<FavoritesBloc>(context).add(FetchFavoritesEvent());
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state is FavoritesLoaded) {
+          final isInFavorites = state.favorites.contains(id);
+          return ElevatedButton(
+            onPressed: () {
+              if (isInFavorites) {
+                BlocProvider.of<FavoritesBloc>(context).add(RemoveFavoriteEvent(id));
+              } else {
+                BlocProvider.of<FavoritesBloc>(context).add(SaveFavoritesEvent(id));
+              }
+            },
+            child: Row(
+              children: [
+                Icon(isInFavorites ? Icons.favorite : Icons.favorite_border),
+                const SizedBox(width: 5),
+                Flexible(child: Text(isInFavorites ? 'Remove from favorites' : 'Add to favorites')),
+              ],
+            ),
+          );
+        }
+        if (state is FavoritesLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state is FavoritesFailure) {
+          return Center(child: Text(state.failure.message));
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }

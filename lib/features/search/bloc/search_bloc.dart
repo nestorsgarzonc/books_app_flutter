@@ -40,4 +40,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       (r) => state.copyWith(isLoading: false, bookDetail: r),
     );
   }
+
+  Future<Doc?> bookDetailFuture(String id) async {
+    final res = await searchRepository.searchById(id);
+    return res.fold(
+      (l) => null,
+      (r) => r.docs?.first,
+    );
+  }
 }

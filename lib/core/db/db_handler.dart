@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 abstract class IDbHandler {
-  Future<Object> get(String key);
+  Future<dynamic> get(String key);
   Future<void> update(String key, Object value);
   Future<void> delete(String key);
   Future<void> create(String key, Object value);
@@ -28,7 +28,7 @@ class DbHandler implements IDbHandler {
   }
 
   @override
-  Future<Object> get(String key) async {
+  Future<dynamic> get(String key) async {
     final box = await openBox();
     return box.get(key);
   }

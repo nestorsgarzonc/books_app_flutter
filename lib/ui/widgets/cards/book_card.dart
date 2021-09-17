@@ -1,22 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_library/features/search/bloc/search_bloc.dart';
 import 'package:flutter_library/features/search/models/book_model.dart';
 import 'package:flutter_library/ui/favorites/screens/book_details.dart';
 import 'package:flutter_library/ui/widgets/image/custom_network_image.dart';
 
 class BookCard extends StatelessWidget {
   const BookCard({
-    this.onTap,
     required this.id,
-    required this.book,
+    this.onTap,
+    this.book,
     this.imgUrl,
     Key? key,
-    this.axis = Axis.vertical,
   }) : super(key: key);
 
   final String? imgUrl;
   final VoidCallback? onTap;
   final String id;
-  final Axis axis;
+
+  final Doc? book;
+
+  @override
+  Widget build(BuildContext context) {
+    if (book == null) {
+      return FutureBuilder<Doc?>(
+        future: BlocProvider.of<SearchBloc>(context).bookDetailFuture(id),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return BookCardBody(
+              id: id,
+              book: snapshot.data!,
+              onTap: onTap,
+              imgUrl: imgUrl,
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      );
+    } else {
+      return BookCardBody(
+        id: id,
+        book: book!,
+        onTap: onTap,
+        imgUrl: imgUrl,
+      );
+    }
+  }
+}
+
+class BookCardBody extends StatelessWidget {
+  const BookCardBody({
+    Key? key,
+    this.imgUrl,
+    this.onTap,
+    required this.id,
+    required this.book,
+  }) : super(key: key);
+
+  final String? imgUrl;
+  final VoidCallback? onTap;
+  final String id;
+
   final Doc book;
 
   @override
@@ -29,6 +74,7 @@ class BookCard extends StatelessWidget {
       onTap: onTap ?? () => handleOnTapBook(context, _id),
       child: Container(
         width: 200,
+        padding: const EdgeInsets.all(4),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(8),
@@ -37,19 +83,16 @@ class BookCard extends StatelessWidget {
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 0.5)],
           color: Colors.white,
         ),
-        child: Flex(
-          direction: axis,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 190,
-              child: CustomNewtorkImage(imgUrl: imgUrl),
-            ),
-            Flexible(
-              child: Text(
-                book.title ?? '',
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-              ),
+            const Spacer(),
+            CustomNewtorkImage(imgUrl: imgUrl),
+            const Spacer(),
+            Text(
+              book.title ?? '',
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              textAlign: TextAlign.justify,
             ),
             Text(
               book.authorName?.first ?? '',
@@ -65,7 +108,7 @@ class BookCard extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            const SizedBox(),
+            const SizedBox(height: 5),
           ],
         ),
       ),
