@@ -26,7 +26,7 @@ class ListFavoritesBooks extends StatelessWidget {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 20,
+                  crossAxisSpacing: 10,
                   childAspectRatio: 1 / 2,
                   mainAxisSpacing: 20,
                 ),
