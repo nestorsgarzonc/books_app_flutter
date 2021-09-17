@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/ui/favorites/screens/book_details.dart';
-import 'package:flutter_library/ui/favorites/screens/list_favourites_books.dart';
-import 'package:flutter_library/ui/home/screens/home_screen.dart';
-import 'package:flutter_library/ui/search/screens/search_screen.dart';
+import 'package:flutter_books/ui/favorites/screens/book_details.dart';
+import 'package:flutter_books/ui/favorites/screens/list_favourites_books.dart';
+import 'package:flutter_books/ui/home/screens/home_screen.dart';
+import 'package:flutter_books/ui/search/screens/search_screen.dart';
 
 class CustomNavigator {
   static Route onGenerateRoute(RouteSettings routeSettings) {

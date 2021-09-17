@@ -1,5 +1,5 @@
-import 'package:flutter_library/core/api/request_handler.dart';
-import 'package:flutter_library/features/search/models/book_model.dart';
+import 'package:flutter_books/core/api/request_handler.dart';
+import 'package:flutter_books/features/search/models/book_model.dart';
 
 abstract class ISearchDatasource {
   Future<Books> search(String? author, String? book);

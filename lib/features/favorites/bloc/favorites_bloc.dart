@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_library/core/failure/failure.dart';
-import 'package:flutter_library/features/favorites/repository/favorites_repository.dart';
+import 'package:flutter_books/core/failure/failure.dart';
+import 'package:flutter_books/features/favorites/repository/favorites_repository.dart';
 
 part 'favorites_event.dart';
 part 'favorites_state.dart';

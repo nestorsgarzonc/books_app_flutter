@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_library/core/failure/failure.dart';
-import 'package:flutter_library/features/search/datasources/search_datasource.dart';
-import 'package:flutter_library/features/search/models/book_model.dart';
+import 'package:flutter_books/core/failure/failure.dart';
+import 'package:flutter_books/features/search/datasources/search_datasource.dart';
+import 'package:flutter_books/features/search/models/book_model.dart';
 
 abstract class ISearchRepository {
   Future<Either<Failure, Books>> search(String? author, String? book);

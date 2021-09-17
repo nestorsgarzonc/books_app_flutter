@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_library/core/failure/failure.dart';
-import 'package:flutter_library/features/favorites/datasources/favorites_datasource.dart';
+import 'package:flutter_books/core/failure/failure.dart';
+import 'package:flutter_books/features/favorites/datasources/favorites_datasource.dart';
 
 abstract class IFavoriteRepository {
   Future<Either<Failure, List<String>>> fetchFavorites();

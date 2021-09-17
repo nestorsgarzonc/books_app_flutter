@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_library/features/search/bloc/search_bloc.dart';
-import 'package:flutter_library/features/search/models/book_model.dart';
-import 'package:flutter_library/ui/favorites/screens/book_details.dart';
-import 'package:flutter_library/ui/widgets/image/custom_network_image.dart';
+import 'package:flutter_books/features/search/bloc/search_bloc.dart';
+import 'package:flutter_books/features/search/models/book_model.dart';
+import 'package:flutter_books/ui/favorites/screens/book_details.dart';
+import 'package:flutter_books/ui/widgets/image/custom_network_image.dart';
 
 class BookCard extends StatelessWidget {
   const BookCard({

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter_library/core/constants/api_constants.dart';
+import 'package:flutter_books/core/constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 
 abstract class IRequestHandler {

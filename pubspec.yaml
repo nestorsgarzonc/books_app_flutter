@@ -1,4 +1,4 @@
-name: flutter_library
+name: flutter_books
 description: A new Flutter project.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -25,8 +25,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^1.0.0
+  mockito: ^5.0.15
+  mocktail: ^0.1.4
 
 flutter:
   # The following line ensures that the Material Icons font is

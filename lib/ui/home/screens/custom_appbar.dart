@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/core/utils/date_utils.dart';
-import 'package:flutter_library/ui/search/screens/search_screen.dart';
+import 'package:flutter_books/core/utils/date_utils.dart';
+import 'package:flutter_books/ui/search/screens/search_screen.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);

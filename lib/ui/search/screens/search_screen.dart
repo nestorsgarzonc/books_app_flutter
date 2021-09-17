@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_library/core/enums/search_enums.dart';
-import 'package:flutter_library/features/search/bloc/search_bloc.dart';
-import 'package:flutter_library/ui/widgets/cards/book_card.dart';
+import 'package:flutter_books/core/enums/search_enums.dart';
+import 'package:flutter_books/features/search/bloc/search_bloc.dart';
+import 'package:flutter_books/ui/widgets/cards/book_card.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);

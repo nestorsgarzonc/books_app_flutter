@@ -1,4 +1,4 @@
-import 'package:flutter_library/core/db/db_handler.dart';
+import 'package:flutter_books/core/db/db_handler.dart';
 
 abstract class IFavoriteDatasource {
   Future<List<String>> fetchFavorites();

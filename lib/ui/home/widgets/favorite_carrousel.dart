@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_library/features/favorites/bloc/favorites_bloc.dart';
-import 'package:flutter_library/ui/favorites/screens/list_favourites_books.dart';
-import 'package:flutter_library/ui/widgets/cards/book_card.dart';
+import 'package:flutter_books/features/favorites/bloc/favorites_bloc.dart';
+import 'package:flutter_books/ui/favorites/screens/list_favourites_books.dart';
+import 'package:flutter_books/ui/widgets/cards/book_card.dart';
 
 class FavoritesCarrousel extends StatelessWidget {
   const FavoritesCarrousel({Key? key}) : super(key: key);

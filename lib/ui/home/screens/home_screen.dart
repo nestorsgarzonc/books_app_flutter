@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/ui/home/screens/custom_appbar.dart';
-import 'package:flutter_library/ui/home/widgets/favorite_carrousel.dart';
+import 'package:flutter_books/ui/home/screens/custom_appbar.dart';
+import 'package:flutter_books/ui/home/widgets/favorite_carrousel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_library/core/failure/failure.dart';
-import 'package:flutter_library/features/search/models/book_model.dart';
-import 'package:flutter_library/features/search/repository/search_repository.dart';
+import 'package:flutter_books/core/failure/failure.dart';
+import 'package:flutter_books/features/search/models/book_model.dart';
+import 'package:flutter_books/features/search/repository/search_repository.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';
