@@ -90,7 +90,7 @@ class _BookDetailBody extends StatelessWidget {
                               hasIsbn ? 'http://covers.openlibrary.org/b/isbn/$_id-M.jpg' : null,
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 2),
                       SizedBox(
                         width: constraints.maxWidth * 0.55,
                         child: Column(

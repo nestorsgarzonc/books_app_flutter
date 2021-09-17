@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'dart:math';
+
 Books booksFromJson(String str) => Books.fromJson(json.decode(str));
 
 String booksToJson(Books data) => json.encode(data.toJson());
@@ -397,6 +399,14 @@ class Doc {
         "subtitle": subtitle,
         "id_bcid": idBcid == null ? null : List<dynamic>.from(idBcid ?? [].map((x) => x)),
       };
+
+  String getParsedTitle() {
+    if (title == null) {
+      return '';
+    }
+    final len = title!.length;
+    return title!.substring(0, min(40, len)) + '...';
+  }
 }
 
 enum Type { work }

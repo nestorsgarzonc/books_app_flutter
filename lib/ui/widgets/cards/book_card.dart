@@ -74,7 +74,7 @@ class BookCardBody extends StatelessWidget {
       onTap: onTap ?? () => handleOnTapBook(context, _id),
       child: Container(
         width: 200,
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(8),
@@ -90,9 +90,9 @@ class BookCardBody extends StatelessWidget {
             CustomNewtorkImage(imgUrl: imgUrl),
             const Spacer(),
             Text(
-              book.title ?? '',
+              book.getParsedTitle(),
               style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-              textAlign: TextAlign.justify,
+              textAlign: TextAlign.center,
             ),
             Text(
               book.authorName?.first ?? '',
@@ -103,12 +103,8 @@ class BookCardBody extends StatelessWidget {
             ),
             Text(
               '${book.publishYear?.first ?? ''}',
-              style: const TextStyle(
-                fontWeight: FontWeight.w200,
-                fontSize: 14,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
             ),
-            const SizedBox(height: 5),
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_library/core/navigator/navigator.dart';
 import 'package:flutter_library/core/scroll/custom_scroll_behavior.dart';
+import 'package:flutter_library/core/theme/theme.dart';
 import 'package:flutter_library/di.dart';
 import 'package:flutter_library/features/favorites/bloc/favorites_bloc.dart';
 import 'package:flutter_library/features/search/bloc/search_bloc.dart';
@@ -28,15 +29,7 @@ class MyApp extends StatelessWidget {
         title: 'NW Library',
         scrollBehavior: CustomScrollBehavior(),
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          appBarTheme: const AppBarTheme(centerTitle: true),
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-            fillColor: Colors.white.withOpacity(.9),
-            filled: true,
-          ),
-        ),
+        theme: CustomTheme.theme(),
         onGenerateRoute: CustomNavigator.onGenerateRoute,
       ),
     );
