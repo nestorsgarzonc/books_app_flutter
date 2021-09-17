@@ -1,5 +1,7 @@
 # Books app
 
+This app use Hive as local storage to save favorite books and https://openlibrary.org/developers/api as API to fetch books
+
 ### Demo video
 https://user-images.githubusercontent.com/40438456/133720345-76e6123e-f014-46fa-81c4-c2703ce462a7.mp4
 
