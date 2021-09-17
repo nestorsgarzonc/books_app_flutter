@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_library/ui/favorites/screens/book_details.dart';
+import 'package:flutter_library/features/search/models/book_model.dart';
 import 'package:flutter_library/ui/favorites/screens/list_favourites_books.dart';
 import 'package:flutter_library/ui/widgets/cards/book_card.dart';
 
@@ -43,8 +43,8 @@ class FavoritesCarrousel extends StatelessWidget {
               }
               return BookCard(
                 id: '$i',
-                onTap: () => handleOnTapBook(context, '$i'),
-                title: 'NW Title',
+                book: Doc(),
+                //TODO: FINISH
               );
             },
           ),
@@ -55,9 +55,5 @@ class FavoritesCarrousel extends StatelessWidget {
 
   void handleOnTapMyFav(BuildContext context) {
     Navigator.of(context).pushNamed(ListFavoritesBooks.route);
-  }
-
-  void handleOnTapBook(BuildContext context, String id) {
-    Navigator.of(context).pushNamed(BookDetails.route, arguments: BookDetailsArgs(bookId: id));
   }
 }

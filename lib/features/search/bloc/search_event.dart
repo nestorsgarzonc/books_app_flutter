@@ -8,8 +8,14 @@ abstract class SearchEvent extends Equatable {
 }
 
 class SearchBook extends SearchEvent {
-  const SearchBook(this.title, this.author);
+  const SearchBook({this.title, this.author});
 
   final String? title;
   final String? author;
+}
+
+class SearchBookById extends SearchEvent {
+  const SearchBookById({required this.id});
+
+  final String? id;
 }

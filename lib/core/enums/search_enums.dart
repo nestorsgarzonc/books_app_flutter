@@ -1,0 +1,1 @@
+enum SearchEnums { title, author }

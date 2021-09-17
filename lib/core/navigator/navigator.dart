@@ -15,7 +15,9 @@ class CustomNavigator {
         return MaterialPageRoute(builder: (context) => const ListFavoritesBooks());
       case BookDetails.route:
         final args = routeSettings.arguments as BookDetailsArgs;
-        return MaterialPageRoute(builder: (context) => BookDetails(bookId: args.bookId));
+        return MaterialPageRoute(
+          builder: (context) => BookDetails(bookId: args.bookId, book: args.book),
+        );
       default:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
     }

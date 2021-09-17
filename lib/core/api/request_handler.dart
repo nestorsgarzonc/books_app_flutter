@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter_library/core/constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,11 +25,19 @@ abstract class IRequestHandler {
 class RequestHandler implements IRequestHandler {
   Uri getUrl(String path) {
     final uri = Uri.parse('${ApiConstants.path}$path');
+    log('URI: $uri');
     return uri;
   }
 
   String encodeBody(Map<String, dynamic>? body) {
+    log('BODY: $body');
     return json.encode(body);
+  }
+
+  void printLogs(http.Response response) {
+    log('STATUS: ${response.statusCode}');
+    log('HEADERS: ${response.headers}');
+    log('BODY: ${response.body}');
   }
 
   @override
@@ -36,16 +45,20 @@ class RequestHandler implements IRequestHandler {
     String path, {
     Map<String, String>? headers,
     Map<String, dynamic>? body,
-  }) {
+  }) async {
     final uri = getUrl(path);
     final encodedBody = encodeBody(body);
-    return http.delete(uri, headers: headers, body: encodedBody);
+    final res = await http.delete(uri, headers: headers, body: encodedBody);
+    printLogs(res);
+    return res;
   }
 
   @override
-  Future<http.Response> makeGet(String path) {
+  Future<http.Response> makeGet(String path) async {
     final uri = getUrl(path);
-    return http.get(uri);
+    final res = await http.get(uri);
+    printLogs(res);
+    return res;
   }
 
   @override
@@ -53,10 +66,12 @@ class RequestHandler implements IRequestHandler {
     String path, {
     Map<String, String>? headers,
     Map<String, dynamic>? body,
-  }) {
+  }) async {
     final uri = getUrl(path);
     final encodedBody = encodeBody(body);
-    return http.post(uri, headers: headers, body: encodedBody);
+    final res = await http.post(uri, headers: headers, body: encodedBody);
+    printLogs(res);
+    return res;
   }
 
   @override
@@ -64,9 +79,11 @@ class RequestHandler implements IRequestHandler {
     String path, {
     Map<String, String>? headers,
     Map<String, dynamic>? body,
-  }) {
+  }) async {
     final uri = getUrl(path);
     final encodedBody = encodeBody(body);
-    return http.put(uri, headers: headers, body: encodedBody);
+    final res = await http.put(uri, headers: headers, body: encodedBody);
+    printLogs(res);
+    return res;
   }
 }

@@ -1,111 +1,192 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_library/features/search/bloc/search_bloc.dart';
+import 'package:flutter_library/features/search/models/book_model.dart';
 import 'package:flutter_library/ui/widgets/image/custom_network_image.dart';
 
 class BookDetailsArgs {
   final String bookId;
+  final Doc? book;
 
-  const BookDetailsArgs({required this.bookId});
+  const BookDetailsArgs({this.book, required this.bookId});
 
   @override
   String toString() => 'BookDetailsArgs(bookId: $bookId)';
 }
 
-class BookDetails extends StatelessWidget {
-  const BookDetails({Key? key, required this.bookId}) : super(key: key);
+class BookDetails extends StatefulWidget {
+  const BookDetails({Key? key, required this.bookId, this.book}) : super(key: key);
 
   static const route = '/book-details';
   final String bookId;
+  final Doc? book;
+
+  @override
+  State<BookDetails> createState() => _BookDetailsState();
+}
+
+class _BookDetailsState extends State<BookDetails> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.book == null) {
+      BlocProvider.of<SearchBloc>(context).add(SearchBookById(id: widget.bookId));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Book Details')),
-      body: LayoutBuilder(builder: (context, constraints) {
+      body: widget.book == null
+          ? BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state.bookDetailFailure != null) {
+                  return const Center(child: Text('Book Details Failed'));
+                }
+                if (state.bookDetail?.docs?.isEmpty ?? true) {
+                  return const Center(child: Text('Book Details Failed'));
+                }
+                return _BookDetailBody(bookId: widget.bookId, book: state.bookDetail!.docs!.first);
+              },
+            )
+          : _BookDetailBody(bookId: widget.bookId, book: widget.book),
+    );
+  }
+}
+
+class _BookDetailBody extends StatelessWidget {
+  const _BookDetailBody({Key? key, required this.bookId, this.book}) : super(key: key);
+
+  final String bookId;
+  final Doc? book;
+
+  @override
+  Widget build(BuildContext context) {
+    final hasIsbn = book?.isbn != null || (book?.isbn ?? []).isNotEmpty;
+    final _id = hasIsbn ? (book?.isbn!.first ?? '') : bookId;
+    return LayoutBuilder(
+      builder: (context, constraints) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 240,
+                  width: constraints.maxWidth,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Hero(
-                        child: const CustomNewtorkImage(),
-                        tag: bookId,
+                      SizedBox(
+                        width: constraints.maxWidth * 0.35,
+                        child: CustomNewtorkImage(
+                          imgUrl:
+                              hasIsbn ? 'http://covers.openlibrary.org/b/isbn/$_id-M.jpg' : null,
+                        ),
                       ),
-                      const SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Title',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
+                      const SizedBox(width: 10),
+                      SizedBox(
+                        width: constraints.maxWidth * 0.56,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              book?.title ?? '',
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                             ),
-                          ),
-                          Row(
-                            children: [
-                              ...List.generate(
-                                5,
-                                (_) => const Icon(Icons.star, color: Colors.orange),
-                              ).toList(),
-                              const SizedBox(width: 5),
-                              const Text('5/5'),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          SizedBox(
-                            width: constraints.maxWidth * 0.4,
-                            height: 40,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: const [
-                                  Icon(Icons.favorite),
-                                  SizedBox(width: 5),
-                                  Flexible(child: Text('Add to favorites')),
-                                ],
-                              ),
+                            Text(
+                              book?.authorName?.first ?? '',
+                              style: const TextStyle(fontSize: 20),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: constraints.maxWidth * 0.4,
-                            height: 40,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: const [
-                                  Icon(Icons.book),
-                                  SizedBox(width: 5),
-                                  Text('Buy'),
-                                ],
-                              ),
+                            Text(
+                              '${book?.publishYear?.first ?? ''}',
+                              style: const TextStyle(fontSize: 20),
                             ),
-                          ),
-                        ],
+                            Row(
+                              children: [
+                                ...List.generate(
+                                  5,
+                                  (_) => const Icon(Icons.star, color: Colors.orange),
+                                ).toList(),
+                                const SizedBox(width: 5),
+                                const Text('5/5'),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            SizedBox(
+                              width: constraints.maxWidth * 0.4,
+                              height: 40,
+                              child: FavouriteButton(id: _id),
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),
                 ),
-                const SizedBox(height: 15),
-                const Text(
-                  'Synopsis',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                BookDetailsItem(
+                  title: 'Subject',
+                  content: book?.subject?.join(', '),
                 ),
-                const Text(
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
-                  textAlign: TextAlign.justify,
-                )
+                BookDetailsItem(
+                  title: 'Overview',
+                  content: book?.text?.join(', '),
+                ),
               ],
             ),
           ),
         );
-      }),
+      },
+    );
+  }
+}
+
+class FavouriteButton extends StatelessWidget {
+  const FavouriteButton({Key? key, required this.id}) : super(key: key);
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Row(
+        children: const [
+          Icon(Icons.favorite),
+          SizedBox(width: 5),
+          Flexible(child: Text('Add to favorites')),
+        ],
+      ),
+    );
+  }
+}
+
+class BookDetailsItem extends StatelessWidget {
+  const BookDetailsItem({Key? key, this.title, this.content}) : super(key: key);
+
+  final String? title;
+  final String? content;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title ?? '',
+          style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+        ),
+        Text(
+          content ?? '',
+          textAlign: TextAlign.justify,
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }
